@@ -21,7 +21,7 @@ async function register(req, res) {
   try {
     // Check if User is already registered
     const userQuery =
-      "SELECT username, userid FROM users WHERE username = $1 OR email = $2";
+      "SELECT user_name FROM users WHERE user_name = $1 OR email = $2";
     const { rows: user } = await dbConnection.query(userQuery, [
       username,
       email,
@@ -44,9 +44,9 @@ async function register(req, res) {
 
     // Register User
     const insertQuery = `
-      INSERT INTO users (username, firstname, lastname, email, password)
+      INSERT INTO users (user_name, first_name, last_name, email, password)
       VALUES ($1, $2, $3, $4, $5)
-      RETURNING userid`;
+      RETURNING id`;
     const { rows: result } = await dbConnection.query(insertQuery, [
       username,
       firstname,
@@ -55,19 +55,20 @@ async function register(req, res) {
       hashedPassword,
     ]);
 
-    const userId = result[0].userid;
+    const userId = result[0].id;
 
     const userCreatedQuery =
-      "SELECT username, firstname, userid FROM users WHERE userid = $1";
+      "SELECT user_name, first_name, id FROM users WHERE id = $1";
     const { rows: userCreated } = await dbConnection.query(userCreatedQuery, [
       userId,
     ]);
+    console.log("User Created: ", userCreated);
 
     res.status(StatusCodes.CREATED).json({
       msg: "User created",
-      username: userCreated[0].username,
-      userid: userCreated[0].userid,
-      firstname: userCreated[0].firstname,
+      username: userCreated[0].user_name,
+      id: userCreated[0].id,
+      firstname: userCreated[0].first_name,
     });
   } catch (error) {
     console.error("error", error);
@@ -90,7 +91,7 @@ async function login(req, res) {
   try {
     // Check if User email is found
     const userQuery =
-      "SELECT username, firstname, userid, password FROM users WHERE email = $1";
+      "SELECT user_name, first_name, id, password FROM users WHERE email = $1";
     const { rows: user } = await dbConnection.query(userQuery, [email]);
 
     if (user.length === 0) {
@@ -110,16 +111,16 @@ async function login(req, res) {
     }
 
     // On success sign the JWT
-    const { username, userid, firstname } = user[0];
-    const token = jwt.sign({ username, userid }, process.env.JWT_SECRET, {
+    const { user_name, id, first_name } = user[0];
+    const token = jwt.sign({ user_name, id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
 
     return res.status(StatusCodes.OK).json({
       msg: "User login successful",
-      userid,
-      username,
-      firstname,
+      id,
+      user_name,
+      first_name,
       token,
     });
   } catch (error) {
