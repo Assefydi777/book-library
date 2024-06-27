@@ -48,6 +48,36 @@
     outline: -1px solid slategray;
     border-radius: 8px;
 }
+.fav-btn {
+    padding: 10px 20px;
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-top: 10px; /* Adds space above the button */
+    align-self: center; /* Centers the button within the grid if applicable */
+    width: 85%;
+    margin-left: 2%;
+}
+
+.fav-btn svg {
+    margin-top: .3rem;
+    margin-right: 8px; /* Space between the icon and text */
+    width: 24px; /* Sets the size of the icon */
+    height: 24px; /* Sets the size of the icon */
+    padding-top: .5rem;
+}
+
+.fav-btn:hover {
+    background-color: #0056b3; /* A darker shade of blue for hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds subtle shadow on hover */
+}
+
 
 @media screen and (min-width: 768px){
     .book-details-content{

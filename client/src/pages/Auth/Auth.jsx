@@ -68,7 +68,7 @@ const Auth = () => {
                     setUserLogin(userObject);
 
                 });
-                alert("Successfully signed up to Evangadi.");
+                alert("Successfully signed up to Book Library.");
                 navigate("/");
             }
         } catch (error) {
