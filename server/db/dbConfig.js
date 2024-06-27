@@ -2,6 +2,9 @@ const { Pool } = require("pg");
 
 // const pool = new Pool({
 //   connectionString: process.env.POSTGRES_URL,
+//   ssl: {
+//     rejectUnauthorized: false  // Allows connections to a server with an invalid SSL certificate for testing purposes only
+//   }
 // });
  
 const pool = new Pool({
