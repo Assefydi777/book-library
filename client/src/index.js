@@ -7,6 +7,7 @@ import { AppProvider } from './context.';
 import './index.css';
 import Home from './pages/Home/Home';
 import About from "./pages/About/About";
+import Auth from './pages/Auth/Auth';
 import BookList from "./components/BookList/BookList";
 import BookDetails from "./components/BookDetails/BookDetails";
 
@@ -20,6 +21,7 @@ root.render(
           <Route path = "book" element = {<BookList />} />
           <Route path = "/book/:id" element = {<BookDetails />} />
         </Route>
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </BrowserRouter>
   </AppProvider>
