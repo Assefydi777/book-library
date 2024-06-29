@@ -9,7 +9,7 @@
     padding: 3rem 2rem;
     border-radius: 4px;
     background-color: var(--white-color);
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px 0px;
+    box-shadow: rgba(0, 0, 0, 4) 10px 25px 25px 10px;
     transition: var(--transition);
 }
 .book-item:hover{
