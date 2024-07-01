@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import classes from "./Auth.module.css";
 import { axiosInstance } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +6,7 @@ import { useGlobalContext } from '../../context.';
 
 const Auth = () => {
     const navigate = useNavigate();
-    const { user, setUserLogin, logout } = useGlobalContext();
+    const { setUserLogin} = useGlobalContext();
 
     const [displayLogin, setDisplayLogin] = useState(true);
     const [email, setEmail] = useState("");
